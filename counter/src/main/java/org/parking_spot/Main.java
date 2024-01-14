@@ -7,38 +7,9 @@ import static java.lang.Thread.sleep;
 public class Main {
 
     static int spot = 100;
-
-    static boolean[] parkingAvailable = new boolean[spot];
-
-    public static int countNbrSpot(parkingSpot[] parking){
-        int nbrSpot = 0;
-        for (int i =0; i < parking.length; i++ ){
-            synchronized  (Main.class){
-                if(parking[i].isAvailable){
-                    nbrSpot++;
-                    parkingAvailable[i] = true;
-                    continue;
-                }
-                parkingAvailable[i] = false;
-            }
-        }
-
-        for (int i =0; i < parkingAvailable.length; i++ ){
-            String av = parkingAvailable[i] ? "*":" ";
-            if(i % 10 == 0){
-                System.out.println();
-                System.out.println("=======================");
-            }
-            System.out.print("|"+av);
-        }
-        System.out.println();
-        System.out.println("=======================");
-
-
-        return nbrSpot;
-    }
     public static void main(String[] args) {
 
+        nbrSpot nbr = new nbrSpot(spot);
         parkingSpot[] parking = new parkingSpot[spot];
 
         for (int i =0; i < parking.length; i++ ){
@@ -51,7 +22,7 @@ public class Main {
         while (true){
             try {
                 sleep(10000);
-                System.out.println(String.valueOf(countNbrSpot(parking))+" available spots");
+                System.out.println(String.valueOf(nbr.countNbrSpot(parking))+" available spots");
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
