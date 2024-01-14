@@ -13,7 +13,7 @@ public class Main {
     public static int countNbrSpot(parkingSpot[] parking){
         int nbrSpot = 0;
         for (int i =0; i < parking.length; i++ ){
-            synchronized  (parking[i]){
+            synchronized  (Main.class){
                 if(parking[i].isAvailable){
                     nbrSpot++;
                     parkingAvailable[i] = true;
